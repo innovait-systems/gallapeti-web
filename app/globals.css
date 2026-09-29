@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* Galla Peti brand: Desi Teal Green + Prosperity Gold */
+  --color-brand-50: #e8f8f3;
+  --color-brand-100: #c8efe3;
+  --color-brand-200: #95dfc9;
+  --color-brand-300: #5ccaab;
+  --color-brand-400: #22b690;
+  --color-brand-500: #00a884;
+  --color-brand-600: #00866b; /* text/buttons on white (4.5:1) */
+  --color-brand-700: #006f59;
+  --color-brand-800: #055a49;
+  --color-brand-900: #084a3d;
+
+  --color-gold: #ffb800;
+  --color-gold-soft: #fff4d6;
+  --color-cream: #faf8f2;
+
+  --color-ink: #12201c;
+  --color-ink-soft: #3f4f4a;
+
+  --font-sans: var(--font-poppins);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold-soft);
+  color: var(--color-ink);
+}
+
+/* Warm teal/gold glow used behind hero and legal pages */
+.bg-glow {
+  background:
+    radial-gradient(60rem 36rem at 85% -10%, #fff4d6, transparent 60%),
+    radial-gradient(50rem 30rem at 0% 0%, #e8f8f3, transparent 55%);
+}
