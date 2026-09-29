@@ -11,6 +11,8 @@ export const site = {
 
   url: "https://gallapeti.innovait-systems.com",
   supportEmail: "gallapeti@innovait-systems.com",
+  // Step-by-step guides (separate Docusaurus site: gallapeti/docs).
+  helpUrl: "https://help.gallapeti.innovait-systems.com",
 
   // Android app (Google Play). The package is permanent once published.
   androidPackage: "com.innovait.gallapeti",
@@ -26,5 +28,6 @@ export const nav = [
   { label: "For your shop", href: "/#shops" },
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
+  { label: "Help", href: site.helpUrl },
   { label: "Support", href: "/support" },
 ] as const;

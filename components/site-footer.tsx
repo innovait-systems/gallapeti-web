@@ -15,6 +15,7 @@ const groups = [
   {
     title: "Company",
     links: [
+      { label: "Help guides", href: site.helpUrl },
       { label: "Support", href: "/support" },
       { label: "Contact", href: `mailto:${site.supportEmail}` },
     ],

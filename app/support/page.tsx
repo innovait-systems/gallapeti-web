@@ -16,6 +16,7 @@ const tips = [
 ];
 
 const links = [
+  { label: "Help guides (step by step)", href: site.helpUrl },
   { label: "Frequently asked questions", href: "/#faq" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
@@ -29,7 +30,20 @@ export default function SupportPage() {
         <h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Support</h1>
         <p className="mt-4 text-lg text-ink-soft">We&rsquo;re here to help you bill faster with {site.name}.</p>
 
-        <div className="mt-8 rounded-2xl border border-ink/10 bg-white p-7">
+        <div className="mt-8 rounded-2xl border border-ink/10 bg-gold-soft p-7">
+          <h2 className="text-lg font-semibold text-ink">Step-by-step help guides</h2>
+          <p className="mt-2 text-[15px] text-ink-soft">
+            Setting up your shop, making bills, connecting a printer, importing items from Excel, backups and more — with
+            simple steps for every screen.
+          </p>
+          <div className="mt-6">
+            <Button href={site.helpUrl} variant="gold">
+              Read the help guides
+            </Button>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-ink/10 bg-white p-7">
           <h2 className="text-lg font-semibold text-ink">Email us</h2>
           <p className="mt-2 text-[15px] text-ink-soft">
             Write to{" "}
