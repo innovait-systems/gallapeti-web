@@ -14,6 +14,17 @@ const features = [
   { icon: "📴", title: "Works offline", body: "No internet needed to bill. Everything is saved on your phone, with one-tap backup to Drive or WhatsApp." },
 ];
 
+const screens = [
+  { src: "/screenshots/01-home.webp", alt: "Home: today's sales, profit and bills at a glance" },
+  { src: "/screenshots/02-new-sale.webp", alt: "New bill: tap items from a grid with MRP savings" },
+  { src: "/screenshots/03-upi.webp", alt: "UPI QR with the amount filled in, swipe for another UPI ID" },
+  { src: "/screenshots/04-share.webp", alt: "Send the bill on WhatsApp or SMS, print it or share a PDF" },
+  { src: "/screenshots/05-receipt.webp", alt: "GST bill ready for a 2-inch thermal printer" },
+  { src: "/screenshots/06-reports.webp", alt: "Sales and profit report for the week" },
+  { src: "/screenshots/07-item.webp", alt: "Item with MRP, discount and cost price, showing the margin" },
+  { src: "/screenshots/08-excel.webp", alt: "Excel import preview with new, updated and rows to fix" },
+];
+
 const shops = [
   { icon: "🧺", name: "Kirana & grocery", body: "Loose items by kg, barcodes, MRP and stock." },
   { icon: "🎆", name: "Crackers", body: "Big % off MRP, gift boxes, fast billing in the Diwali rush." },
@@ -77,6 +88,26 @@ export default function Home() {
               <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{f.body}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Screens */}
+      <section id="screens" className="scroll-mt-20 border-t border-ink/10 bg-white">
+        <div className="mx-auto max-w-6xl px-5 py-16">
+          <h2 className="text-3xl font-bold tracking-tight text-ink">See it in action</h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">A real day at a kirana counter — from the first bill to the profit report.</p>
+          <div className="-mx-5 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4">
+            {screens.map((sc) => (
+              <Image
+                key={sc.src}
+                src={sc.src}
+                alt={sc.alt}
+                width={540}
+                height={960}
+                className="h-auto w-60 shrink-0 snap-start rounded-2xl border border-ink/10 shadow-sm sm:w-64"
+              />
+            ))}
+          </div>
         </div>
       </section>
 
