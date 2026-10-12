@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/button";
-import { site } from "@/site.config";
+import { getAppHref, site } from "@/site.config";
 
 const features = [
   { icon: "⚡", title: "Bill in seconds", body: "Tap items on a big grid, scan barcodes, type quantities for loose items, hold a bill and serve the next customer." },
@@ -62,8 +62,8 @@ export default function Home() {
             </p>
             <p className="mt-3 text-base font-semibold text-brand-600">Peti ka Vishwas, Digital ki Raftaar!</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/#get-app" variant="gold">
-                Get the app — it&rsquo;s free
+              <Button href={getAppHref} variant="gold">
+                {onPlay ? "Get it on Google Play — free" : <>Get the app — it&rsquo;s free</>}
               </Button>
               <Button href="/#features" variant="outline">
                 See features
@@ -204,9 +204,14 @@ export default function Home() {
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-ink">Get {site.name} on Android</h2>
           {onPlay ? (
             <>
-              <p className="mt-3 text-ink-soft">Free on Google Play.</p>
+              <p className="mt-3 text-ink-soft">Free on Google Play · Android 7 and newer.</p>
               <div className="mt-8">
                 <Button href={site.playStoreUrl} variant="gold">Get it on Google Play</Button>
+              </div>
+              {/* On a computer? Scan with the phone instead of typing the link. */}
+              <div className="mt-8 hidden flex-col items-center gap-2 sm:flex">
+                <Image src="/play-qr.svg" alt={`QR code to open ${site.name} on Google Play`} width={144} height={144} className="rounded-xl border border-ink/10 bg-white p-2" />
+                <p className="text-sm text-ink-soft">On a computer? Scan with your phone&rsquo;s camera.</p>
               </div>
             </>
           ) : (

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/button";
 import { Logo } from "@/components/logo";
-import { nav, site } from "@/site.config";
+import { getAppHref, nav, site } from "@/site.config";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href="/#get-app" variant="gold">
+          <Button href={getAppHref} variant="gold">
             Get the app
           </Button>
         </div>
@@ -56,7 +56,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Button href="/#get-app" variant="gold" className="mt-2" onClick={() => setOpen(false)}>
+            <Button href={getAppHref} variant="gold" className="mt-2" onClick={() => setOpen(false)}>
               Get the app
             </Button>
           </nav>

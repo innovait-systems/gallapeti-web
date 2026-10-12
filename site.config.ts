@@ -16,12 +16,15 @@ export const site = {
 
   // Android app (Google Play). The package is permanent once published.
   androidPackage: "com.innovait.gallapeti",
-  // Empty until the Play listing is public — the site then shows "request access" instead.
-  playStoreUrl: "",
+  // Live on Google Play since October 2026. Empty → the site falls back to "request early access".
+  playStoreUrl: "https://play.google.com/store/apps/details?id=com.innovait.gallapeti",
 
   locationLegal: "Chennai, Tamil Nadu, India",
   lastUpdated: "29 September 2026",
 } as const;
+
+/** Where every "Get the app" button goes: straight to Google Play once the listing is live. */
+export const getAppHref = site.playStoreUrl || "/#get-app";
 
 export const nav = [
   { label: "Features", href: "/#features" },
