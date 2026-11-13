@@ -38,8 +38,8 @@ const faqs = [
   { q: "Which printers work?", a: "Most 2-inch (58mm) and 3-inch (80mm) ESC/POS thermal printers over Bluetooth or Wi-Fi, 4-inch and custom widths, and any printer your phone can reach through Android's print screen (A4, inkjet or Save as PDF)." },
   { q: "Where is my data stored?", a: "On your phone. We don't run servers that receive your bills or items. Use Settings → Backup & restore to save a copy to Google Drive, email or your own WhatsApp." },
   { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Sync across phones is planned for Galla Peti Business." },
-  { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
-  { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, up to 3 months of daily backups, and removes the branding line. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
+  { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, returns with credit notes, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
+  { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, day-end closing with a cash count, staff PINs with permissions, up to 3 months of daily backups, and removes the branding line. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
   { q: "Does it support GST invoices?", a: "Yes — tax invoices with CGST/SGST or IGST, HSN codes, GSTIN on the bill and a GST summary. You remain responsible for the tax rates you set on your items." },
 ];
 
@@ -138,7 +138,7 @@ export default function Home() {
             <h3 className="text-xl font-bold text-ink">Free</h3>
             <p className="mt-1 text-3xl font-bold text-brand-600">₹0</p>
             <ul className="mt-5 space-y-2 text-[15px] text-ink-soft">
-              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
+              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Returns with credit notes", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
                 <li key={x} className="flex gap-2">
                   <span className="text-brand-600">✓</span>
                   {x}
@@ -169,6 +169,8 @@ export default function Home() {
                 "Bill to a business: GSTIN, address, IGST",
                 "A4 GST invoice PDF",
                 "Quotations that turn into bills",
+                "Close the day — cash count and day-end summary",
+                "Staff PINs — who billed, who can discount or refund",
                 "Daily backups kept up to 3 months",
                 "No branding on bills",
               ].map((x) => (
