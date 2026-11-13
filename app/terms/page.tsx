@@ -34,9 +34,35 @@ export default function TermsPage() {
       <h2>Free and Pro</h2>
       <p>
         The Free version is free to use with no time limit. Bills made with the Free version include a small &ldquo;Billed
-        with {site.name}&rdquo; line. Paid Pro features, when available, will be described in the app with their price before
-        you buy, and billed through Google Play.
+        with {site.name}&rdquo; line.
       </p>
+      <p>
+        {site.name} Pro is an optional subscription that adds features described in the app (Settings → Plan) before you buy.
+      </p>
+      <ul>
+        <li>
+          <strong>Price and payment.</strong> Pro is sold through Google Play, which takes the payment. Current plans:{" "}
+          {site.proPlans.map((p) => `₹${p.price} per ${p.period}`).join(", ")}. The price shown in the app before you
+          subscribe is the price you pay; prices can change for future periods, and Google Play tells you before a change applies.
+        </li>
+        <li>
+          <strong>Renewal.</strong> Subscriptions renew automatically at the end of each period until you cancel. If a free trial
+          or an introductory price is offered, the regular price applies after it.
+        </li>
+        <li>
+          <strong>Cancelling.</strong> Cancel anytime in Google Play → Payments &amp; subscriptions → Subscriptions (or in the
+          app: Settings → Plan → Manage Pro). Pro keeps working until the end of the period you&rsquo;ve paid for, then the app
+          returns to the Free version. Your data is not deleted.
+        </li>
+        <li>
+          <strong>Refunds.</strong> Refunds are handled under Google Play&rsquo;s refund policy. For help, write to us at the
+          address below.
+        </li>
+        <li>
+          <strong>New phone.</strong> Pro belongs to the Google account you bought it with. On a new phone, sign in with the same
+          account and use Restore purchase.
+        </li>
+      </ul>
 
       <h2>Test versions</h2>
       <p>

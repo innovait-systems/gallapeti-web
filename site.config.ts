@@ -20,7 +20,14 @@ export const site = {
   playStoreUrl: "https://play.google.com/store/apps/details?id=com.innovait.gallapeti",
 
   locationLegal: "Chennai, Tamil Nadu, India",
-  lastUpdated: "29 September 2026",
+  lastUpdated: "13 November 2026",
+
+  // Galla Peti Pro (Google Play subscription). Keep in step with the base plans in Play Console.
+  proPlans: [
+    { label: "Monthly", price: 119, period: "month" },
+    { label: "Quarterly", price: 299, period: "3 months" },
+    { label: "Yearly", price: 999, period: "year" },
+  ],
 } as const;
 
 /** Where every "Get the app" button goes: straight to Google Play once the listing is live. */

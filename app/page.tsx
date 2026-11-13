@@ -3,15 +3,15 @@ import { Button } from "@/components/button";
 import { getAppHref, site } from "@/site.config";
 
 const features = [
-  { icon: "⚡", title: "Bill in seconds", body: "Tap items on a big grid, scan barcodes, type quantities for loose items, hold a bill and serve the next customer." },
-  { icon: "🖨️", title: "Thermal printing", body: "2\", 3\", 4\" or any custom roll. Bluetooth and Wi-Fi printers, or any printer through Android. Your shop logo on every bill." },
+  { icon: "⚡", title: "Bill in seconds", body: "Tap items on a grid or list, search by item number, scan barcodes, sell loose items by kg, hold a bill and serve the next customer." },
+  { icon: "🖨️", title: "Thermal printing", body: "2\", 3\", 4\" or any custom roll, Bluetooth and Wi-Fi printers. Tamil, Hindi and emoji print properly. Token numbers for food counters." },
   { icon: "🧾", title: "GST-ready bills", body: "CGST/SGST or IGST worked out for you, prices with or without GST, HSN codes and GSTIN check." },
   { icon: "🏷️", title: "MRP & discounts", body: "Sell at MRP, your own price, or a % off — like 80% off MRP for crackers. Bills show what the customer saved." },
   { icon: "📲", title: "UPI QR with amount", body: "Customers scan and pay the exact amount. Add backup UPI IDs and swipe to the next one if a payment fails." },
   { icon: "💬", title: "WhatsApp & SMS bills", body: "Send the bill to the customer's WhatsApp or SMS from your own phone, or share a PDF." },
   { icon: "📊", title: "Sales & profit", body: "Today, this week and this month — sales, bills, profit, payments, top items, with a simple chart." },
   { icon: "📥", title: "Items from Excel", body: "Download the template, fill your price list in Excel or Google Sheets, and import hundreds of items at once." },
-  { icon: "📴", title: "Works offline", body: "No internet needed to bill. Everything is saved on your phone, with one-tap backup to Drive or WhatsApp." },
+  { icon: "📴", title: "Works offline", body: "No internet needed to bill. Everything is saved on your phone, with an automatic daily backup and one-tap backup to Drive or WhatsApp." },
 ];
 
 const screens = [
@@ -37,13 +37,15 @@ const faqs = [
   { q: "Do I need internet to use Galla Peti?", a: "No. Billing, printing, reports and backups work fully offline. Internet is only used when you choose to share a bill on WhatsApp or email, or print to a Wi-Fi printer on your network." },
   { q: "Which printers work?", a: "Most 2-inch (58mm) and 3-inch (80mm) ESC/POS thermal printers over Bluetooth or Wi-Fi, 4-inch and custom widths, and any printer your phone can reach through Android's print screen (A4, inkjet or Save as PDF)." },
   { q: "Where is my data stored?", a: "On your phone. We don't run servers that receive your bills or items. Use Settings → Backup & restore to save a copy to Google Drive, email or your own WhatsApp." },
-  { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Sync across phones is planned for Pro." },
-  { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, Excel import and reports are free forever. Free bills end with a small “Billed with Galla Peti” line. Pro, coming soon, adds cloud backup, multiple phones, staff logins and removes the line." },
+  { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Sync across phones is planned for Galla Peti Business." },
+  { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
+  { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, up to 3 months of daily backups, and removes the branding line. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
   { q: "Does it support GST invoices?", a: "Yes — tax invoices with CGST/SGST or IGST, HSN codes, GSTIN on the bill and a GST summary. You remain responsible for the tax rates you set on your items." },
 ];
 
 export default function Home() {
   const onPlay = Boolean(site.playStoreUrl);
+  const yearly = site.proPlans.find((p) => p.period === "year") ?? site.proPlans[site.proPlans.length - 1]!;
   return (
     <>
       {/* Hero */}
@@ -136,7 +138,7 @@ export default function Home() {
             <h3 className="text-xl font-bold text-ink">Free</h3>
             <p className="mt-1 text-3xl font-bold text-brand-600">₹0</p>
             <ul className="mt-5 space-y-2 text-[15px] text-ink-soft">
-              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Sales & profit reports", "Backup & restore"].map((x) => (
+              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
                 <li key={x} className="flex gap-2">
                   <span className="text-brand-600">✓</span>
                   {x}
@@ -148,17 +150,40 @@ export default function Home() {
           <div className="rounded-2xl border border-ink/10 bg-gold-soft p-7">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-bold text-ink">Pro</h3>
-              <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink">Coming soon</span>
+              <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink">Save 30% yearly</span>
             </div>
-            <p className="mt-1 text-[15px] text-ink-soft">Everything in Free, plus:</p>
+            <p className="mt-1 text-3xl font-bold text-ink">
+              ₹{yearly.price}
+              <span className="text-base font-medium text-ink-soft"> / year</span>
+            </p>
+            <p className="mt-1 text-sm text-ink-soft">
+              {site.proPlans
+                .filter((p) => p !== yearly)
+                .map((p) => `₹${p.price} / ${p.period}`)
+                .join(" · ")}{" "}
+              · Everything in Free, plus:
+            </p>
             <ul className="mt-5 space-y-2 text-[15px] text-ink-soft">
-              {["Automatic cloud backup", "Use on multiple phones with shared sales", "Staff logins and shifts", "GST summaries & Excel reports", "No branding on bills"].map((x) => (
+              {[
+                "Fast entry — barcode scanner or item no. + Enter",
+                "Bill to a business: GSTIN, address, IGST",
+                "A4 GST invoice PDF",
+                "Quotations that turn into bills",
+                "Daily backups kept up to 3 months",
+                "No branding on bills",
+              ].map((x) => (
                 <li key={x} className="flex gap-2">
                   <span className="text-ink">★</span>
                   {x}
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-sm text-ink-soft">
+              Subscribe in the app (Settings → Plan) through Google Play. Cancel anytime.{" "}
+              <a href={`${site.helpUrl}/settings/galla-peti-pro`} className="font-medium text-ink underline">
+                About Pro
+              </a>
+            </p>
           </div>
         </div>
       </section>
@@ -170,7 +195,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl font-bold text-ink">Your shop data stays on your phone</h2>
             <p className="mt-2 text-ink-soft">
-              No sign-up and no account. Bills, items and customer numbers are stored on your device — we don&rsquo;t collect them.
+              No sign-up and no account — not even for Pro. Bills, items and customer numbers are stored on your device — we don&rsquo;t collect them.
               Read our <a href="/privacy" className="font-medium text-brand-600 underline">Privacy Policy</a>.
             </p>
           </div>

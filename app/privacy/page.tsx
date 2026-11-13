@@ -86,11 +86,25 @@ export default function PrivacyPage() {
         <a href="/delete-data">Delete your data</a>.
       </p>
 
+      <h2>Pro subscriptions</h2>
+      <p>
+        If you subscribe to {site.name} Pro, the purchase is made and processed by Google Play under Google&rsquo;s privacy
+        policy. The app asks Google Play only whether this Google account has an active Pro subscription; it doesn&rsquo;t
+        receive your card or UPI details. We may see order details in our Google Play account (such as order number, plan and
+        date) to support you and handle refunds. Pro doesn&rsquo;t send your shop data anywhere.
+      </p>
+
+      <h2>Automatic backups</h2>
+      <p>
+        The app saves a daily backup of your shop data inside its own storage on your phone (the last 7 days, or longer with
+        Pro). These copies never leave the phone unless you share them, and they are deleted with the app.
+      </p>
+
       <h2>Future online features</h2>
       <p>
-        We plan optional online features such as cloud backup and multi-phone sync (Pro). If you choose to use them, this
-        policy will be updated first to explain exactly what is stored online and how, and nothing will leave your phone
-        unless you turn those features on.
+        We plan optional online features such as cloud backup and multi-phone sync ({site.name} Business). If you choose to use
+        them, this policy will be updated first to explain exactly what is stored online and how, and nothing will leave your
+        phone unless you turn those features on.
       </p>
 
       <h2>Children</h2>
