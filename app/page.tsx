@@ -8,10 +8,22 @@ const features = [
   { icon: "🧾", title: "GST-ready bills", body: "CGST/SGST or IGST worked out for you, prices with or without GST, HSN codes and GSTIN check." },
   { icon: "🏷️", title: "MRP & discounts", body: "Sell at MRP, your own price, or a % off — like 80% off MRP for crackers. Bills show what the customer saved." },
   { icon: "📲", title: "UPI QR with amount", body: "Customers scan and pay the exact amount. Add backup UPI IDs and swipe to the next one if a payment fails." },
+  { icon: "🗣️", title: "Bill in your language", body: "Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Gujarati or Bengali — with English alongside if you like. Free for every shop." },
   { icon: "💬", title: "WhatsApp & SMS bills", body: "Send the bill to the customer's WhatsApp or SMS from your own phone, or share a PDF." },
   { icon: "📊", title: "Sales & profit", body: "Today, this week and this month — sales, bills, profit, payments, top items, with a simple chart." },
   { icon: "📥", title: "Items from Excel", body: "Download the template, fill your price list in Excel or Google Sheets, and import hundreds of items at once." },
   { icon: "📴", title: "Works offline", body: "No internet needed to bill. Everything is saved on your phone, with an automatic daily backup and one-tap backup to Drive or WhatsApp." },
+];
+
+const billLanguages = [
+  { code: "ta", name: "Tamil", native: "தமிழ்", total: "மொத்தம்", thanks: "நன்றி! மீண்டும் வருக." },
+  { code: "hi", name: "Hindi", native: "हिन्दी", total: "कुल", thanks: "धन्यवाद! फिर पधारें।" },
+  { code: "te", name: "Telugu", native: "తెలుగు", total: "మొత్తం", thanks: "ధన్యవాదాలు! మళ్ళీ రండి." },
+  { code: "kn", name: "Kannada", native: "ಕನ್ನಡ", total: "ಒಟ್ಟು", thanks: "ಧನ್ಯವಾದಗಳು! ಮತ್ತೆ ಬನ್ನಿ." },
+  { code: "ml", name: "Malayalam", native: "മലയാളം", total: "ആകെ", thanks: "നന്ദി! വീണ്ടും വരിക." },
+  { code: "mr", name: "Marathi", native: "मराठी", total: "एकूण", thanks: "धन्यवाद! पुन्हा भेट द्या." },
+  { code: "gu", name: "Gujarati", native: "ગુજરાતી", total: "કુલ", thanks: "આભાર! ફરી પધારજો." },
+  { code: "bn", name: "Bengali", native: "বাংলা", total: "মোট", thanks: "ধন্যবাদ! আবার আসবেন।" },
 ];
 
 const screens = [
@@ -40,6 +52,7 @@ const faqs = [
   { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Sync across phones is planned for Galla Peti Business." },
   { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, returns with credit notes, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
   { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, staff PINs with permissions and a sign-in history, up to 3 months of daily backups, and removes the branding line. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
+  { q: "Can bills print in Tamil, Hindi or another language?", a: "Yes, free for every shop. In Settings → Bill language pick Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Gujarati or Bengali, and choose whether English shows alongside. It's used on printed bills, WhatsApp and SMS bills, PDFs, A4 invoices, quotations and credit notes. Item names print just as you type them, in any language." },
   { q: "Does it support GST invoices?", a: "Yes — tax invoices with CGST/SGST or IGST, HSN codes, GSTIN on the bill and a GST summary. You remain responsible for the tax rates you set on your items." },
 ];
 
@@ -90,6 +103,41 @@ export default function Home() {
               <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{f.body}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Bill language */}
+      <section id="language" className="scroll-mt-20 border-t border-ink/10 bg-white">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-ink">Bills in your customer&rsquo;s language</h2>
+            <p className="mt-3 text-ink-soft">
+              Print bill titles, totals, payment and thank-you lines in eight Indian languages — with English alongside if you
+              like. Works on any 2-inch or 3-inch thermal printer, on WhatsApp and SMS bills, PDFs and A4 invoices. Free for every
+              shop.
+            </p>
+            <p className="mt-3 text-sm text-ink-soft">
+              Item names and your shop name print just as you type them. GSTIN, HSN, CGST/SGST and UPI stay in English, as on
+              official bills.
+            </p>
+            <a href={`${site.helpUrl}/settings/bill-language`} className="mt-5 inline-block font-medium text-brand-600 underline">
+              How to set it up
+            </a>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {billLanguages.map((l) => (
+              <div key={l.name} lang={l.code} className="rounded-xl border border-ink/10 bg-cream p-4">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-semibold text-ink">{l.native}</span>
+                  <span className="text-xs text-ink-soft">{l.name}</span>
+                </div>
+                <div className="mt-2 flex justify-between gap-2 font-mono text-sm text-ink">
+                  <span>{l.total} / TOTAL</span><span>₹555.00</span>
+                </div>
+                <div className="mt-1 text-xs text-ink-soft">{l.thanks}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
