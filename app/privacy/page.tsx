@@ -89,9 +89,19 @@ export default function PrivacyPage() {
       <h2>Pro subscriptions</h2>
       <p>
         If you subscribe to {site.name} Pro, the purchase is made and processed by Google Play under Google&rsquo;s privacy
-        policy. The app asks Google Play only whether this Google account has an active Pro subscription; it doesn&rsquo;t
+        policy. The app asks Google Play whether this Google account has an active Pro subscription; it doesn&rsquo;t
         receive your card or UPI details. We may see order details in our Google Play account (such as order number, plan and
-        date) to support you and handle refunds. Pro doesn&rsquo;t send your shop data anywhere.
+        date) to support you and handle refunds.
+      </p>
+      <p>
+        To stop copied or modified versions of the app from unlocking Pro, the app checks a subscription with our server
+        about once a day when online. It sends only the Google Play purchase reference, a random number created when the app
+        was installed, and a Google Play Integrity token (which tells us whether this is the genuine app from Google Play). Our
+        server asks Google about them and answers yes or no. We don&rsquo;t store these details beyond normal short-lived
+        server logs, and the check never sends your shop data &mdash; no bills, items, customers or shop name.
+      </p>
+      <p>
+        The 14-day free trial of Pro is kept only on your phone (and in your backups). Starting it sends nothing anywhere.
       </p>
 
       <h2>Automatic backups</h2>

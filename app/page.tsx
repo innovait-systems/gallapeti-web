@@ -51,7 +51,7 @@ const faqs = [
   { q: "Where is my data stored?", a: "On your phone. We don't run servers that receive your bills or items. Use Settings → Backup & restore to save a copy to Google Drive, email or your own WhatsApp." },
   { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Sync across phones is planned for Galla Peti Business." },
   { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, returns with credit notes, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
-  { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, staff PINs with permissions and a sign-in history, up to 3 months of daily backups, and removes the branding line. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
+  { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, staff PINs with permissions and a sign-in history, up to 3 months of daily backups, and removes the branding line. Try all of it free for 14 days — no payment or card, it just turns off unless you subscribe. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
   { q: "Can bills print in Tamil, Hindi or another language?", a: "Yes, free for every shop. In Settings → Bill language pick Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Gujarati or Bengali, and choose whether English shows alongside. It's used on printed bills, WhatsApp and SMS bills, PDFs, A4 invoices, quotations and credit notes. Item names print just as you type them, in any language." },
   { q: "Does it support GST invoices?", a: "Yes — tax invoices with CGST/SGST or IGST, HSN codes, GSTIN on the bill and a GST summary. You remain responsible for the tax rates you set on your items." },
 ];
@@ -231,7 +231,8 @@ export default function Home() {
               ))}
             </ul>
             <p className="mt-5 text-sm text-ink-soft">
-              Subscribe in the app (Settings → Plan) through Google Play. Cancel anytime.{" "}
+              <strong className="text-ink">Try it free for 14 days</strong> &mdash; no payment, no card. Then subscribe in the
+              app (Settings → Plan) through Google Play. Cancel anytime.{" "}
               <a href={`${site.helpUrl}/settings/galla-peti-pro`} className="font-medium text-ink underline">
                 About Pro
               </a>
