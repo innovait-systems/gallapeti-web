@@ -9,7 +9,11 @@
 import { createHash, createSign, sign as signData } from "node:crypto";
 
 export const PACKAGE = "com.innovait.gallapeti";
-export const PRODUCT = "galla_pro";
+/** Play subscription products -> plan. galla_pro was the only product before Growth existed. */
+export const PRODUCTS = { galla_growth: "growth", galla_pro: "pro" } as const;
+export type Tier = (typeof PRODUCTS)[keyof typeof PRODUCTS];
+const tierOf = (productId: string | undefined): Tier | null =>
+  productId && Object.prototype.hasOwnProperty.call(PRODUCTS, productId) ? PRODUCTS[productId as keyof typeof PRODUCTS] : null;
 /** An integrity token older than this is refused (the app asks for a fresh one every check). */
 export const MAX_TOKEN_AGE_MS = 10 * 60 * 1000;
 
@@ -61,18 +65,21 @@ export function checkIntegrity(decoded: unknown, r: CheckRequest, now: number): 
   return { ok: false, reason: "retry" };
 }
 
-export type SubscriptionResult = { pro: true; until: number } | { pro: false; reason: "no-purchase" | "expired" };
+export type SubscriptionResult = { pro: true; tier: Tier; until: number } | { pro: false; reason: "no-purchase" | "expired" };
 
 const LIVE_STATES = new Set(["SUBSCRIPTION_STATE_ACTIVE", "SUBSCRIPTION_STATE_IN_GRACE_PERIOD", "SUBSCRIPTION_STATE_CANCELED"]);
 
-/** Reads Google Play's purchases.subscriptionsv2 answer. Cancelled subscriptions stay Pro until they run out. */
+/** Reads Google Play's purchases.subscriptionsv2 answer. Cancelled subscriptions stay paid until they run out. */
 export function checkSubscription(sub: unknown, now: number): SubscriptionResult {
   const s = (sub ?? {}) as { subscriptionState?: string; lineItems?: { productId?: string; expiryTime?: string }[] };
-  const ours = (s.lineItems ?? []).filter((l) => l.productId === PRODUCT);
+  const ours = (s.lineItems ?? []).filter((l) => tierOf(l.productId) !== null);
   if (!ours.length) return { pro: false, reason: "no-purchase" };
-  const until = Math.max(...ours.map((l) => Date.parse(l.expiryTime ?? "") || 0));
-  if (!LIVE_STATES.has(s.subscriptionState ?? "") || until <= now) return { pro: false, reason: "expired" };
-  return { pro: true, until };
+  if (!LIVE_STATES.has(s.subscriptionState ?? "")) return { pro: false, reason: "expired" };
+  const live = ours.filter((l) => (Date.parse(l.expiryTime ?? "") || 0) > now);
+  if (!live.length) return { pro: false, reason: "expired" };
+  const tier: Tier = live.some((l) => tierOf(l.productId) === "pro") ? "pro" : "growth";
+  const until = Math.max(...live.filter((l) => tierOf(l.productId) === tier).map((l) => Date.parse(l.expiryTime ?? "") || 0));
+  return { pro: true, tier, until };
 }
 
 /** What the app trusts, once the signature checks out. */
@@ -82,8 +89,11 @@ export interface Verdict {
   installId: string;
   /** First 16 hex of SHA-256(purchase token): ties the verdict to that purchase without storing it. */
   purchase: string;
+  /** Paid (Growth or Pro). */
   pro: boolean;
-  /** Subscription paid until (ms); 0 when not Pro. */
+  /** Which plan is paid; null when not paid. */
+  tier: Tier | null;
+  /** Subscription paid until (ms); 0 when not paid. */
   until: number;
   checkedAt: number;
   reason?: "not-genuine" | "no-purchase" | "expired";
@@ -96,6 +106,7 @@ export function makeVerdict(r: CheckRequest, now: number, result: SubscriptionRe
     installId: r.installId,
     purchase: sha256Hex(r.purchaseToken).slice(0, 16),
     pro: result.pro,
+    tier: result.pro ? result.tier : null,
     until: result.pro ? result.until : 0,
     checkedAt: now,
     ...(result.pro ? {} : { reason: result.reason }),

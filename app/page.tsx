@@ -49,16 +49,16 @@ const faqs = [
   { q: "Do I need internet to use Galla Peti?", a: "No. Billing, printing, reports and backups work fully offline. Internet is only used when you choose to share a bill on WhatsApp or email, or print to a Wi-Fi printer on your network." },
   { q: "Which printers work?", a: "Most 2-inch (58mm) and 3-inch (80mm) ESC/POS thermal printers over Bluetooth or Wi-Fi, 4-inch and custom widths, and any printer your phone can reach through Android's print screen (A4, inkjet or Save as PDF)." },
   { q: "Where is my data stored?", a: "On your phone. We don't run servers that receive your bills or items. Use Settings → Backup & restore to save a copy to Google Drive, email or your own WhatsApp." },
-  { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Sync across phones is planned for Galla Peti Business." },
+  { q: "Can I use it on more than one phone?", a: "Yes — each phone keeps its own items and bills. Give each phone a different bill number prefix (A1, A2…) so invoice numbers never clash. Copy your item list between phones with Excel export/import. Combining sales from several phones without internet is coming to Galla Peti Pro; cloud sync is planned for Galla Peti Business." },
   { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, returns with credit notes, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
-  { q: "What does Pro add, and how do I pay?", a: "Pro adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, staff PINs with permissions and a sign-in history, up to 3 months of daily backups, and removes the branding line. Try all of it free for 14 days — no payment or card, it just turns off unless you subscribe. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
+  { q: "What do Growth and Pro add, and how do I pay?", a: "Growth adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, up to 3 months of daily backups, and removes the branding line. Pro adds staff PINs with permissions and a sign-in history, and soon billing on more than one phone with all sales on the owner's phone. Try all of Pro free for 14 days — no payment or card, it just turns off unless you subscribe. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
+  { q: "Does it work on a computer?", a: "Not yet — Galla Peti runs on Android phones and tablets. An Android tablet gives you a big screen at the counter and works with the same printer. A computer version is planned for Galla Peti Business." },
   { q: "Can bills print in Tamil, Hindi or another language?", a: "Yes, free for every shop. In Settings → Bill language pick Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Gujarati or Bengali, and choose whether English shows alongside. It's used on printed bills, WhatsApp and SMS bills, PDFs, A4 invoices, quotations and credit notes. Item names print just as you type them, in any language." },
   { q: "Does it support GST invoices?", a: "Yes — tax invoices with CGST/SGST or IGST, HSN codes, GSTIN on the bill and a GST summary. You remain responsible for the tax rates you set on your items." },
 ];
 
 export default function Home() {
   const onPlay = Boolean(site.playStoreUrl);
-  const yearly = site.proPlans.find((p) => p.period === "year") ?? site.proPlans[site.proPlans.length - 1]!;
   return (
     <>
       {/* Hero */}
@@ -180,13 +180,13 @@ export default function Home() {
 
       {/* Pricing */}
       <section id="pricing" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-16">
-        <h2 className="text-3xl font-bold tracking-tight text-ink">Free forever. Pro when you grow.</h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+        <h2 className="text-3xl font-bold tracking-tight text-ink">Free forever. Growth and Pro when you need more.</h2>
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
           <div className="rounded-2xl border-2 border-brand-600 bg-white p-7">
             <h3 className="text-xl font-bold text-ink">Free</h3>
             <p className="mt-1 text-3xl font-bold text-brand-600">₹0</p>
             <ul className="mt-5 space-y-2 text-[15px] text-ink-soft">
-              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Returns with credit notes", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
+              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Bills in 8 Indian languages", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Returns with credit notes", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
                 <li key={x} className="flex gap-2">
                   <span className="text-brand-600">✓</span>
                   {x}
@@ -195,24 +195,13 @@ export default function Home() {
             </ul>
             <p className="mt-5 text-sm text-ink-soft">Bills end with a small &ldquo;Billed with {site.name}&rdquo; line.</p>
           </div>
-          <div className="rounded-2xl border border-ink/10 bg-gold-soft p-7">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-ink">Pro</h3>
-              <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink">Save 30% yearly</span>
-            </div>
-            <p className="mt-1 text-3xl font-bold text-ink">
-              ₹{yearly.price}
-              <span className="text-base font-medium text-ink-soft"> / year</span>
-            </p>
-            <p className="mt-1 text-sm text-ink-soft">
-              {site.proPlans
-                .filter((p) => p !== yearly)
-                .map((p) => `₹${p.price} / ${p.period}`)
-                .join(" · ")}{" "}
-              · Everything in Free, plus:
-            </p>
-            <ul className="mt-5 space-y-2 text-[15px] text-ink-soft">
-              {[
+          {[
+            {
+              name: "Growth",
+              pitch: "For a busy shop on one phone",
+              plans: site.growthPlans,
+              intro: "Everything in Free, plus:",
+              items: [
                 "Fast entry — barcode scanner or item no. + Enter",
                 "Bill to a business: GSTIN, address, IGST",
                 "A4 GST invoice PDF",
@@ -220,25 +209,60 @@ export default function Home() {
                 "GST & item reports — any month, quarter or year, Excel for GSTR-1",
                 "Share your price list on WhatsApp or as a PDF",
                 "Close the day — cash count and day-end summary",
-                "Staff PINs — each person signs in, permissions, sign-in history",
                 "Daily backups kept up to 3 months",
                 "No branding on bills",
-              ].map((x) => (
-                <li key={x} className="flex gap-2">
-                  <span className="text-ink">★</span>
-                  {x}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-sm text-ink-soft">
-              <strong className="text-ink">Try it free for 14 days</strong> &mdash; no payment, no card. Then subscribe in the
-              app (Settings → Plan) through Google Play. Cancel anytime.{" "}
-              <a href={`${site.helpUrl}/settings/galla-peti-pro`} className="font-medium text-ink underline">
-                About Pro
-              </a>
-            </p>
-          </div>
+              ],
+            },
+            {
+              name: "Pro",
+              pitch: "For shops with staff and more than one counter",
+              plans: site.proPlans,
+              intro: "Everything in Growth, plus:",
+              items: [
+                "Staff PINs — each person signs in, permissions, sign-in history",
+                "Bill on more than one phone, with all sales on the owner's phone — no internet needed (coming soon)",
+              ],
+            },
+          ].map((tier) => {
+            const yearly = tier.plans.find((p) => p.period === "year") ?? tier.plans[tier.plans.length - 1]!;
+            return (
+              <div key={tier.name} className="rounded-2xl border border-ink/10 bg-gold-soft p-7">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-bold text-ink">{tier.name}</h3>
+                  {tier.name === "Pro" ? <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink">14 days free</span> : null}
+                </div>
+                <p className="text-sm text-ink-soft">{tier.pitch}</p>
+                <p className="mt-2 text-3xl font-bold text-ink">
+                  ₹{yearly.price.toLocaleString("en-IN")}
+                  <span className="text-base font-medium text-ink-soft"> / year</span>
+                </p>
+                <p className="mt-1 text-sm text-ink-soft">
+                  {tier.plans
+                    .filter((p) => p !== yearly)
+                    .map((p) => `₹${p.price} / ${p.period}`)
+                    .join(" · ")}
+                </p>
+                <p className="mt-4 text-sm font-medium text-ink">{tier.intro}</p>
+                <ul className="mt-2 space-y-2 text-[15px] text-ink-soft">
+                  {tier.items.map((x) => (
+                    <li key={x} className="flex gap-2">
+                      <span className="text-ink">★</span>
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
+        <p className="mt-6 text-[15px] text-ink-soft">
+          <strong className="text-ink">Try all of Pro free for 14 days</strong> &mdash; no payment, no card. Then choose Growth or
+          Pro in the app (Settings → Plan) through Google Play. Cancel anytime. <strong className="text-ink">Business</strong>{" "}
+          &mdash; cloud sync, unlimited phones and a computer version &mdash; is planned.{" "}
+          <a href={`${site.helpUrl}/settings/galla-peti-pro`} className="font-medium text-ink underline">
+            About the plans
+          </a>
+        </p>
       </section>
 
       {/* Privacy */}
@@ -248,7 +272,7 @@ export default function Home() {
           <div>
             <h2 className="text-2xl font-bold text-ink">Your shop data stays on your phone</h2>
             <p className="mt-2 text-ink-soft">
-              No sign-up and no account — not even for Pro. Bills, items and customer numbers are stored on your device — we don&rsquo;t collect them.
+              No sign-up and no account — not even for Growth or Pro. Bills, items and customer numbers are stored on your device — we don&rsquo;t collect them.
               Read our <a href="/privacy" className="font-medium text-brand-600 underline">Privacy Policy</a>.
             </p>
           </div>

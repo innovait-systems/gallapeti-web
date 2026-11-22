@@ -31,35 +31,45 @@ export default function TermsPage() {
         <li>You are responsible for having permission to record and message your customers&rsquo; contact details.</li>
       </ul>
 
-      <h2>Free and Pro</h2>
+      <h2>Free and paid plans</h2>
       <p>
         The Free version is free to use with no time limit. Bills made with the Free version include a small &ldquo;Billed
         with {site.name}&rdquo; line.
       </p>
       <p>
-        {site.name} Pro is an optional subscription that adds features described in the app (Settings → Plan) before you buy.
+        {site.name} Growth and {site.name} Pro are optional subscriptions that add features described in the app (Settings →
+        Plan) before you buy. Pro includes everything in Growth.
       </p>
       <ul>
         <li>
-          <strong>Price and payment.</strong> Pro is sold through Google Play, which takes the payment. Current plans:{" "}
+          <strong>Price and payment.</strong> Plans are sold through Google Play, which takes the payment. Current prices:
+          Growth {site.growthPlans.map((p) => `₹${p.price} per ${p.period}`).join(", ")}; Pro{" "}
           {site.proPlans.map((p) => `₹${p.price} per ${p.period}`).join(", ")}. The price shown in the app before you
           subscribe is the price you pay; prices can change for future periods, and Google Play tells you before a change applies.
         </li>
         <li>
-          <strong>Renewal.</strong> Subscriptions renew automatically at the end of each period until you cancel. If a free trial
-          or an introductory price is offered, the regular price applies after it.
+          <strong>Renewal.</strong> Subscriptions renew automatically at the end of each period until you cancel. If an
+          introductory price is offered, the regular price applies after it.
         </li>
         <li>
           <strong>Cancelling.</strong> Cancel anytime in Google Play → Payments &amp; subscriptions → Subscriptions (or in the
-          app: Settings → Plan → Manage Pro). Pro keeps working until the end of the period you&rsquo;ve paid for, then the app
-          returns to the Free version. Your data is not deleted.
+          app: Settings → Plan → Manage subscription). Your plan keeps working until the end of the period you&rsquo;ve paid
+          for, then the app returns to the Free version. Your data is not deleted.
         </li>
         <li>
           <strong>Refunds.</strong> Refunds are handled under Google Play&rsquo;s refund policy. For help, write to us at the
           address below.
         </li>
         <li>
-          <strong>New phone.</strong> Pro belongs to the Google account you bought it with. On a new phone, sign in with the same
+          <strong>Changing plan.</strong> You can upgrade from Growth to Pro in the app; Google Play credits the unused part of
+          Growth.
+        </li>
+        <li>
+          <strong>Free trial.</strong> The 14-day free trial of Pro is started in the app, needs no payment and simply ends after
+          14 days. It is once per shop.
+        </li>
+        <li>
+          <strong>New phone.</strong> Your plan belongs to the Google account you bought it with. On a new phone, sign in with the same
           account and use Restore purchase.
         </li>
       </ul>
