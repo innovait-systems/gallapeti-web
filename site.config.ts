@@ -20,7 +20,7 @@ export const site = {
   playStoreUrl: "https://play.google.com/store/apps/details?id=com.innovait.gallapeti",
 
   locationLegal: "Chennai, Tamil Nadu, India",
-  lastUpdated: "22 November 2026",
+  lastUpdated: "23 November 2026",
 
   // Google Play subscriptions. Keep in step with the base plans in Play Console
   // (galla_growth = Growth, galla_pro = Pro).
