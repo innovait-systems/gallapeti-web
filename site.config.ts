@@ -6,7 +6,7 @@ export const site = {
   tagline: "Billing app for every Indian shop",
   slogan: "Traditional Trust + Modern Speed",
   description:
-    "Galla Peti is a fast, offline billing app for Indian shops — GST bills, thermal printing, UPI QR, WhatsApp bills, items from Excel, and sales & profit reports. Free forever.",
+    "Galla Peti is a fast, offline billing app for Indian shops — GST bills, thermal printing, UPI QR, WhatsApp bills, khata (customer credit), items from Excel, and sales & profit reports. Free forever.",
   company: "Innovait Systems",
 
   url: "https://gallapeti.innovait-systems.com",

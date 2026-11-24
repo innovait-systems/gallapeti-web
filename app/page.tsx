@@ -7,6 +7,8 @@ const features = [
   { icon: "🖨️", title: "Thermal printing", body: "2\", 3\", 4\" or any custom roll, Bluetooth and Wi-Fi printers. Tamil, Hindi and emoji print properly. Token numbers for food counters." },
   { icon: "🧾", title: "GST-ready bills", body: "CGST/SGST or IGST worked out for you, prices with or without GST, HSN codes and GSTIN check." },
   { icon: "🏷️", title: "MRP & discounts", body: "Sell at MRP, your own price, or a % off — like 80% off MRP for crackers. Bills show what the customer saved." },
+  { icon: "📒", title: "Khata (udhaar) book", body: "Put all or part of a bill on a customer's khata, take payments in cash or UPI, and see who owes what. Free. Growth adds WhatsApp reminders and statements." },
+  { icon: "🔖", title: "Your own barcode stickers", body: "Give loose and home-packed items a barcode and print stickers on your receipt printer, with MRP and your price. Weighed packets scan at the right weight. (Growth)" },
   { icon: "📲", title: "UPI QR with amount", body: "Customers scan and pay the exact amount. Add backup UPI IDs and swipe to the next one if a payment fails." },
   { icon: "🗣️", title: "Bill in your language", body: "Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Gujarati or Bengali — with English alongside if you like. Free for every shop." },
   { icon: "💬", title: "WhatsApp & SMS bills", body: "Send the bill to the customer's WhatsApp or SMS from your own phone, or share a PDF." },
@@ -35,6 +37,9 @@ const screens = [
   { src: "/screenshots/06-reports.webp", alt: "Sales and profit report for the week" },
   { src: "/screenshots/07-item.webp", alt: "Item with MRP, discount and cost price, showing the margin" },
   { src: "/screenshots/08-excel.webp", alt: "Excel import preview with new, updated and rows to fix" },
+  { src: "/screenshots/09-khata.webp", alt: "A customer's khata: what they owe, the limit, and every bill and payment" },
+  { src: "/screenshots/10-khata-book.webp", alt: "Khata book: total due and who owes you, biggest first" },
+  { src: "/screenshots/11-stickers.webp", alt: "Barcode stickers with MRP and your price, printed on a receipt printer" },
 ];
 
 const shops = [
@@ -50,8 +55,9 @@ const faqs = [
   { q: "Which printers work?", a: "Most 2-inch (58mm) and 3-inch (80mm) ESC/POS thermal printers over Bluetooth or Wi-Fi, 4-inch and custom widths, and any printer your phone can reach through Android's print screen (A4, inkjet or Save as PDF)." },
   { q: "Where is my data stored?", a: "On your phone. We don't run servers that receive your bills or items. Use Settings → Backup & restore to save a copy to Google Drive, email or your own WhatsApp." },
   { q: "Can I use it on more than one phone?", a: "Yes. With Galla Peti Pro, link up to 2 counter phones to the owner's phone: each counter bills on its own, and all bills, returns and day closings come together on the owner's phone. Items, prices, stock and staff are sent to the counters. The phones sync inside the shop over Wi-Fi or phone to phone — no internet needed — and if they can't connect, a locked file sent by WhatsApp does the same. Cloud sync from anywhere is planned for Galla Peti Business." },
-  { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, returns with credit notes, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
-  { q: "What do Growth and Pro add, and how do I pay?", a: "Growth adds fast barcode-scanner billing, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, up to 3 months of daily backups, and removes the branding line. Pro adds staff PINs with permissions and a sign-in history, and up to 2 counter phones with all sales on the owner's phone. Try all of Pro free for 14 days — no payment or card, it just turns off unless you subscribe. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
+  { q: "Can customers buy on credit (khata)?", a: "Yes, free. At payment choose Khata, pick the customer and, if they pay part now, enter it — the rest goes on their khata. Take payments later in cash, UPI or card, and see everyone's balance in the khata book. Set a limit per customer if you like. Galla Peti Growth adds a WhatsApp reminder with your UPI ID and a statement to print or share as a PDF. With counter phones, the counters can give khata too and the owner's phone keeps the balances." },
+  { q: "Is it really free?", a: "Yes. Unlimited bills, GST, printing, WhatsApp bills, khata (customer credit), returns with credit notes, Excel import, reports and a daily backup are free forever. Free bills end with a small “Billed with Galla Peti” line." },
+  { q: "What do Growth and Pro add, and how do I pay?", a: "Growth adds fast barcode-scanner billing, your own barcode stickers and weighed packets, khata reminders and statements, bills to businesses with their GSTIN, A4 GST invoices, quotations, GST and item-wise reports with Excel for your accountant, a price list to share on WhatsApp or as a PDF, day-end closing with a cash count, up to 3 months of daily backups, and removes the branding line. Pro adds staff PINs with permissions and a sign-in history, and up to 2 counter phones with all sales on the owner's phone. Try all of Pro free for 14 days — no payment or card, it just turns off unless you subscribe. Subscribe in the app (Settings → Plan) — monthly, quarterly or yearly through Google Play, with UPI, card or Play balance. Cancel anytime in Google Play." },
   { q: "Does it work on a computer?", a: "Not yet — Galla Peti runs on Android phones and tablets. An Android tablet gives you a big screen at the counter and works with the same printer. A computer version is planned for Galla Peti Business." },
   { q: "Can bills print in Tamil, Hindi or another language?", a: "Yes, free for every shop. In Settings → Bill language pick Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Gujarati or Bengali, and choose whether English shows alongside. It's used on printed bills, WhatsApp and SMS bills, PDFs, A4 invoices, quotations and credit notes. Item names print just as you type them, in any language." },
   { q: "Does it support GST invoices?", a: "Yes — tax invoices with CGST/SGST or IGST, HSN codes, GSTIN on the bill and a GST summary. You remain responsible for the tax rates you set on your items." },
@@ -186,7 +192,7 @@ export default function Home() {
             <h3 className="text-xl font-bold text-ink">Free</h3>
             <p className="mt-1 text-3xl font-bold text-brand-600">₹0</p>
             <ul className="mt-5 space-y-2 text-[15px] text-ink-soft">
-              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Bills in 8 Indian languages", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Returns with credit notes", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
+              {["Unlimited bills", "GST invoices", "Thermal & any-printer printing", "Bills in 8 Indian languages", "Shop logo on bills", "UPI QR, WhatsApp & SMS bills", "Excel import/export", "Khata (udhaar) — credit, part payments, balances", "Returns with credit notes", "Sales & profit reports", "Daily backup (last 7 days)"].map((x) => (
                 <li key={x} className="flex gap-2">
                   <span className="text-brand-600">✓</span>
                   {x}
@@ -203,6 +209,8 @@ export default function Home() {
               intro: "Everything in Free, plus:",
               items: [
                 "Fast entry — barcode scanner or item no. + Enter",
+                "Barcode stickers & weighed packets on your receipt printer",
+                "Khata reminders on WhatsApp and statements (PDF)",
                 "Bill to a business: GSTIN, address, IGST",
                 "A4 GST invoice PDF",
                 "Quotations that turn into bills",
