@@ -55,7 +55,9 @@ export default function PrivacyPage() {
           <strong>Nearby devices (Wi-Fi and Bluetooth)</strong> — with Galla Peti Pro, to sync the shop&rsquo;s own counter
           phones with the owner&rsquo;s phone (Settings &rarr; Phones). Bills, items and stock go directly between your
           phones inside the shop, locked with a key only your phones have. Nothing is sent to us or to any server. The same
-          applies to a sync file you send between your phones yourself.
+          applies to a sync file you send between your phones yourself. Google&rsquo;s Nearby service, which finds the
+          other phone, needs the location permission on every Android version; Galla Peti never reads, saves or sends your
+          location.
         </li>
         <li>
           <strong>Network access</strong> — to print to Wi-Fi printers on your shop&rsquo;s network and to open WhatsApp,
